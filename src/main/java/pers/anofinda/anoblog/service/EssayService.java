@@ -26,14 +26,21 @@ public class EssayService {
         this.essayRepository = essayRepository;
     }
 
-    public List<Essay> getAll() {
+    public List<Essay> getEssays() {
         Iterable<Essay> essayIterable = essayRepository.findAll();
         return IterableUtils.toList(essayIterable);
     }
 
     public Essay getEssayById(Long id) {
-        Optional<Essay> essay = essayRepository.findById(id);
-        return essay.orElse(null);
+        return essayRepository.findById(id).orElse(null);
+    }
+
+    public Essay getEssayByTittle(String tittle) {
+        return essayRepository.findByTittle(tittle).orElse(null);
+    }
+
+    public List<Essay> getEssaysByTagName(String tagName) {
+        return essayRepository.findAllByTagName(tagName);
     }
 
     public long count() {
@@ -41,13 +48,15 @@ public class EssayService {
     }
 
     /**
-     * 更新文章内容，如果文章不存在则创建新文章
-     * @param id 文章编号
+     * 更新文章内容
+     *
+     * @param id      文章编号
      * @param content 修改内容
      */
-    public void save(Long id, String content) {
+    public void update(Long id, String content) {
         Optional<Essay> optionalEssay = essayRepository.findById(id);
-        Essay essay = optionalEssay.orElse(new Essay());
+        if (optionalEssay.isEmpty()) return;
+        Essay essay = optionalEssay.get();
         essay.setContent(content);
         essay.setLastUpdate(LocalDateTime.now());
         essayRepository.save(essay);

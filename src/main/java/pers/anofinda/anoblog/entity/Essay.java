@@ -3,9 +3,7 @@ package pers.anofinda.anoblog.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -17,11 +15,11 @@ import java.time.LocalDateTime;
 @Table(name = "essay")
 public class Essay extends AbstractEntity {
     @Column(name = "tittle", nullable = false, unique = true)
-    private String title;
-    @Column(name = "description", nullable = false)
-    private String description;
-    @Column(name = "content", nullable = false)
+    private String tittle;
+    @Column(name = "content")
     private String content;
+    @Column(name = "tag_name", nullable = false,unique = true)
+    private String tagName;
     @Column(name = "sticky", nullable = false)
     private Integer sticky;
     @Column(name = "visible", nullable = false)
