@@ -6,7 +6,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,13 +31,12 @@ public class Blog extends AbstractEntity {
     private Type type;
 
     @JsonIgnore
+    @ToString.Exclude
     @ManyToMany(targetEntity = Tag.class, cascade = CascadeType.ALL)
     @JoinTable(name = "blog_tag",
             joinColumns = {@JoinColumn(name = "blog_id", referencedColumnName = "id")},
-            inverseJoinColumns ={@JoinColumn(name = "tag_id",referencedColumnName = "id")})
-    @ToString.Exclude
+            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
-    private long typeId;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastUpdate;
 
