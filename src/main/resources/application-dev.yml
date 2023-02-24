@@ -10,4 +10,4 @@ server:
   port: 8080
 blog:
   jwt:
-    secret: "123456"
+    secret: "99c2918fe19d30bce25ab1ac8a3733ec"
