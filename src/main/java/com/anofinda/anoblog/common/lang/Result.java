@@ -21,11 +21,19 @@ public class Result {
         return new Result("0", message, data);
     }
 
+    public static Result success(String code, String message, Object data) {
+        return new Result(code, message, data);
+    }
+
     public static Result fail(String message) {
         return new Result("-1", message, null);
     }
 
     public static Result fail(String message, Object data) {
         return new Result("-1", message, data);
+    }
+
+    public static Result fail(String code, String message, Object data) {
+        return new Result(code, message, data);
     }
 }
