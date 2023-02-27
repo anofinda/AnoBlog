@@ -1,7 +1,9 @@
 package com.anofinda.anoblog.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -24,14 +26,16 @@ public class Blog extends AbstractEntity {
     private int sticky;
     private boolean visible;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "type_id")
+    @ManyToOne(targetEntity = Type.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
 
+    /**
+     * 级联关系为PERSIST，添加博客时自动添加标签
+     */
     @JsonIgnore
     @ToString.Exclude
-    @ManyToMany(targetEntity = Tag.class, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Tag.class, cascade = CascadeType.PERSIST)
     @JoinTable(name = "blog_tag",
             joinColumns = {@JoinColumn(name = "blog_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})

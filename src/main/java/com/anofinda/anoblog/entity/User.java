@@ -2,6 +2,7 @@ package com.anofinda.anoblog.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class User extends AbstractEntity {
     private int status;
     private String avatar;
     private LocalDateTime lastLogin;
+    private String permission;
 
     @Override
     public boolean equals(Object o) {

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.anofinda</groupId>
-    <artifactId>AnoBlog</artifactId>
+    <artifactId>AnoBlogApi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>AnoBlog</name>
     <description>A personal blog system</description>

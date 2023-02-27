@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Objects;
@@ -25,8 +26,8 @@ import java.util.Set;
 public class Tag extends AbstractEntity {
     private String name;
     @JsonIgnore
-    @ManyToMany(mappedBy = "tags")
     @ToString.Exclude
+    @ManyToMany(mappedBy = "tags")
     private Set<Blog> blogs;
 
     @Override
