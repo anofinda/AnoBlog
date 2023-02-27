@@ -1,6 +1,6 @@
 package com.anofinda.anoblog.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -19,7 +19,6 @@ public abstract class AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     protected LocalDateTime createTime;
 
     @Override

@@ -1,7 +1,7 @@
 package com.anofinda.anoblog.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -25,7 +25,6 @@ public class Blog extends AbstractEntity {
     private boolean visible;
 
     @JsonIgnore
-    @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
     private Type type;
@@ -37,7 +36,6 @@ public class Blog extends AbstractEntity {
             joinColumns = {@JoinColumn(name = "blog_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastUpdate;
 
     @Override

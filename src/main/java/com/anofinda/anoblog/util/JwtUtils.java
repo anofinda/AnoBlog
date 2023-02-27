@@ -17,12 +17,16 @@ import java.util.Date;
  */
 @Slf4j
 @Component
-public class JwtUtil {
+public class JwtUtils {
+
+    private static JwtConfiguration jwtConfiguration;
 
     @Autowired
-    private JwtConfiguration jwtConfiguration;
+    public void setJwtConfiguration(JwtConfiguration jwtConfiguration) {
+        JwtUtils.jwtConfiguration = jwtConfiguration;
+    }
 
-    public String getToken(String username) {
+    public static String getToken(String username) {
         Key key = Keys.hmacShaKeyFor(jwtConfiguration.getSecret().getBytes(StandardCharsets.UTF_8));
         Date nowDate = new Date(System.currentTimeMillis());
         Date expireDate = new Date(nowDate.getTime() + jwtConfiguration.getExpire() * 1000);
@@ -35,7 +39,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public Claims getClaims(String token) {
+    public static Claims getClaims(String token) {
         Key key = Keys.hmacShaKeyFor(jwtConfiguration.getSecret().getBytes(StandardCharsets.UTF_8));
         return Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -44,7 +48,7 @@ public class JwtUtil {
                 .getBody();
     }
 
-    public boolean verify(String token, String username) {
+    public static boolean verify(String token, String username) {
         Key key = Keys.hmacShaKeyFor(jwtConfiguration.getSecret().getBytes(StandardCharsets.UTF_8));
         return Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -54,5 +58,9 @@ public class JwtUtil {
                 .getAudience()
                 .equals(username);
 
+    }
+
+    public static boolean isExpired(Date expire) {
+        return expire.before(new Date());
     }
 }

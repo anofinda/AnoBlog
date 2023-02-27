@@ -1,17 +1,15 @@
 package com.anofinda.anoblog.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author dongyudeng
@@ -21,20 +19,21 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "tag")
-public class Tag extends AbstractEntity {
-    private String name;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "tags")
-    @ToString.Exclude
-    private Set<Blog> blogs;
+@Table(name = "user")
+public class User extends AbstractEntity {
+    private String username;
+    private String password;
+
+    private int status;
+    private String avatar;
+    private LocalDateTime lastLogin;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Tag tag = (Tag) o;
-        return id != null && Objects.equals(id, tag.id);
+        User user = (User) o;
+        return getId() != null && Objects.equals(getId(), user.getId());
     }
 
     @Override

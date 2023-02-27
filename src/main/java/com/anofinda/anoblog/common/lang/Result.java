@@ -17,6 +17,10 @@ public class Result {
         return new Result("0", "success", data);
     }
 
+    public static Result success(String message) {
+        return new Result("0", message, null);
+    }
+
     public static Result success(String message, Object data) {
         return new Result("0", message, data);
     }
