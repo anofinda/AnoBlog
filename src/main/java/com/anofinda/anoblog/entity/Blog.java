@@ -26,7 +26,10 @@ public class Blog extends AbstractEntity {
     private int sticky;
     private boolean visible;
 
-    @ManyToOne(targetEntity = Type.class, fetch = FetchType.EAGER)
+    /**
+     * 级联关系为PERSIST，添加博客时自动添加种类
+     */
+    @ManyToOne(targetEntity = Type.class,cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
 
@@ -35,7 +38,7 @@ public class Blog extends AbstractEntity {
      */
     @JsonIgnore
     @ToString.Exclude
-    @ManyToMany(targetEntity = Tag.class, cascade = CascadeType.PERSIST)
+    @ManyToMany(targetEntity = Tag.class, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "blog_tag",
             joinColumns = {@JoinColumn(name = "blog_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})

@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfiguration {
-    @Bean
+    @Bean("authorizer")
     public UserRealm getUserRealm() {
         return new UserRealm();
     }
