@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/ano_blog"
+    username: "ano_blog"
+    password: "AnoBlog"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    username: ano_blog
+    password: AnoBlog
+server:
+  port: 8080
+blog:
+  jwt:
+    secret: "99c2918fe19d30bce25ab1ac8a3733ec"

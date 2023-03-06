@@ -32,7 +32,7 @@ public class AdminApiController {
 
     @PostMapping("/login")
     public Result login(LoginDto loginDto) {
-        log.info("user login:"+loginDto.getUsername());
+        log.info("user login:" + loginDto.getUsername());
         User user = userService.getUserByUsername(loginDto.getUsername());
         if (user == null) {
             return Result.fail("user not exists");
@@ -53,9 +53,9 @@ public class AdminApiController {
         return Result.success("logout success");
     }
 
-    @Profile("dev")
+    @Profile(value = {"dev", "test"})
     @GetMapping("/test")
     public Result test() {
-        return Result.success("hello!");
+        return Result.success("Test success");
     }
 }
